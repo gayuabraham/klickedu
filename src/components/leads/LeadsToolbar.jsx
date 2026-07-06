@@ -4,8 +4,8 @@ export default function LeadsToolbar({ totalCount, filteredCount }) {
   return (
     <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
       <div>
-        <h2 className="text-lg font-semibold text-slate-900">Lead Management</h2>
-        <p className="mt-0.5 text-xs text-slate-500">
+        <h2 className="text-xl font-semibold text-slate-900">Lead Management</h2>
+        <p className="mt-1 text-sm text-slate-500">
           {filteredCount === totalCount
             ? `${totalCount} total leads in pipeline`
             : `Showing ${filteredCount} of ${totalCount} leads`}

@@ -2,7 +2,7 @@ import Button from '../common/Button';
 import { LEAD_STATUSES } from '../../constants/leadStatus';
 
 const inputClass =
-  'w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs text-slate-900 transition-colors focus:border-violet-300 focus:outline-none focus:ring-2 focus:ring-violet-500/15';
+  'w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-900 transition-colors focus:border-violet-300 focus:outline-none focus:ring-2 focus:ring-violet-500/15';
 
 export default function LeadFilters({ filters, employees, onFilterChange, onReset, onSearchChange }) {
   const hasActiveFilters =
@@ -16,7 +16,7 @@ export default function LeadFilters({ filters, employees, onFilterChange, onRese
   return (
     <div className="card-elevated p-4 sm:p-5">
       <div className="mb-4 md:hidden">
-        <label className="mb-1.5 block text-[10px] font-semibold uppercase tracking-wide text-slate-500">
+        <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-slate-500">
           Search
         </label>
         <div className="relative">
@@ -35,7 +35,7 @@ export default function LeadFilters({ filters, employees, onFilterChange, onRese
 
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
         <div>
-          <label className="mb-1.5 block text-[10px] font-semibold uppercase tracking-wide text-slate-500">Status</label>
+          <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-slate-500">Status</label>
           <select value={filters.status} onChange={(e) => onFilterChange('status', e.target.value)} className={inputClass}>
             <option value="">All Statuses</option>
             {LEAD_STATUSES.map((status) => (
@@ -44,7 +44,7 @@ export default function LeadFilters({ filters, employees, onFilterChange, onRese
           </select>
         </div>
         <div>
-          <label className="mb-1.5 block text-[10px] font-semibold uppercase tracking-wide text-slate-500">Assigned Employee</label>
+          <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-slate-500">Assigned Employee</label>
           <select value={filters.employee} onChange={(e) => onFilterChange('employee', e.target.value)} className={inputClass}>
             <option value="">All Employees</option>
             {employees.map((emp) => (
@@ -53,11 +53,11 @@ export default function LeadFilters({ filters, employees, onFilterChange, onRese
           </select>
         </div>
         <div>
-          <label className="mb-1.5 block text-[10px] font-semibold uppercase tracking-wide text-slate-500">From Date</label>
+          <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-slate-500">From Date</label>
           <input type="date" value={filters.startDate} onChange={(e) => onFilterChange('startDate', e.target.value)} className={inputClass} />
         </div>
         <div>
-          <label className="mb-1.5 block text-[10px] font-semibold uppercase tracking-wide text-slate-500">To Date</label>
+          <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-slate-500">To Date</label>
           <input type="date" value={filters.endDate} onChange={(e) => onFilterChange('endDate', e.target.value)} className={inputClass} />
         </div>
       </div>

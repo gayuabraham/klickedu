@@ -2,7 +2,7 @@ import Modal from '../common/Modal';
 import StatusBadge from '../common/StatusBadge';
 import Avatar from '../common/Avatar';
 import NotesSection from './NotesSection';
-import { CURRENT_USER } from '../../constants/appUser';
+import { useLeadsContext } from '../../context/LeadsContext';
 import { formatDate } from '../../utils/dateUtils';
 
 function DetailRow({ label, value }) {
@@ -15,6 +15,8 @@ function DetailRow({ label, value }) {
 }
 
 export default function LeadDetailsModal({ lead, isOpen, onClose, onAddNote, onUpdateNote, onDeleteNote }) {
+  const { currentUser } = useLeadsContext();
+
   if (!lead) return null;
 
   function handleAddNote(text) {
@@ -22,7 +24,7 @@ export default function LeadDetailsModal({ lead, isOpen, onClose, onAddNote, onU
       id: `n${lead.id}-${Date.now()}`,
       text,
       createdDate: new Date().toISOString().split('T')[0],
-      createdBy: CURRENT_USER.name,
+      createdBy: currentUser.name,
     });
   }
 

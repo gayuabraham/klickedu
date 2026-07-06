@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import KlickEduLogo from '../components/common/KlickEduLogo';
 
-const iconClass = 'h-4 w-4 shrink-0';
+const iconClass = 'h-5 w-5 shrink-0';
 
 const mainNav = [
   { to: '/', label: 'Dashboard', end: true, icon: <svg className={iconClass} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" /></svg> },
@@ -24,7 +24,7 @@ function NavItem({ item, onClose }) {
       onClick={onClose}
       title={item.label}
       className={({ isActive }) =>
-        `flex items-center gap-2.5 rounded-lg px-2.5 py-2 text-xs font-medium transition-colors duration-200 lg:px-3 ${
+        `flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors duration-200 lg:px-3.5 ${
           isActive
             ? 'bg-violet-50 text-violet-700 ring-1 ring-violet-100'
             : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
@@ -48,11 +48,11 @@ export default function Sidebar({ isOpen, onClose }) {
       )}
 
       <aside
-        className={`fixed inset-y-0 left-0 z-50 flex w-14 lg:w-52 flex-col border-r border-slate-200 bg-white transition-transform duration-300 ease-out lg:static lg:translate-x-0 ${
+        className={`fixed inset-y-0 left-0 z-50 flex w-16 lg:w-56 xl:w-60 flex-col border-r border-slate-200 bg-white transition-transform duration-300 ease-out lg:static lg:translate-x-0 ${
           isOpen ? 'translate-x-0 shadow-xl' : '-translate-x-full'
         }`}
       >
-        <div className="flex h-14 items-center justify-center border-b border-slate-100 px-2 pt-4 pb-3 lg:h-16 lg:justify-start lg:px-4 lg:pt-5">
+        <div className="flex h-14 items-center justify-center border-b border-slate-100 px-2 pt-4 pb-3 lg:h-16 lg:justify-start lg:px-5 lg:pt-5">
           <KlickEduLogo variant="sidebar" />
         </div>
 
@@ -64,9 +64,9 @@ export default function Sidebar({ isOpen, onClose }) {
 
         <div className="space-y-1 border-t border-slate-100 p-2 lg:p-3">
           <NavItem item={bottomNav} onClose={onClose} />
-          <div className="hidden lg:block rounded-xl bg-slate-50 p-3 ring-1 ring-slate-100">
-            <p className="text-[10px] font-semibold text-slate-700">Need assistance?</p>
-            <p className="mt-0.5 text-[9px] leading-snug text-slate-500">
+          <div className="hidden lg:block rounded-xl bg-slate-50 p-3.5 ring-1 ring-slate-100">
+            <p className="text-xs font-semibold text-slate-700">Need assistance?</p>
+            <p className="mt-1 text-xs leading-snug text-slate-500">
               Contact support for lead management help.
             </p>
           </div>

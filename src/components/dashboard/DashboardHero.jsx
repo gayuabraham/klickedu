@@ -1,10 +1,8 @@
 import { Link } from 'react-router-dom';
-import { CURRENT_USER } from '../../constants/appUser';
 import EducationIllustration from './EducationIllustration';
 import LastUpdated from './LastUpdated';
 
-export default function DashboardHero({ leadCount, lastUpdated }) {
-  return (
+export default function DashboardHero({ leadCount, lastUpdated, firstName }) {  return (
     <div className="card-elevated overflow-hidden">
       <div className="flex flex-col sm:flex-row">
         <div className="flex flex-1 flex-col justify-center px-4 py-2 sm:px-5 sm:py-3">
@@ -15,7 +13,7 @@ export default function DashboardHero({ leadCount, lastUpdated }) {
             <LastUpdated updatedAt={lastUpdated} />
           </div>
           <h2 className="mt-1 text-base font-bold text-slate-900 sm:text-lg">
-            Welcome back, <span className="brand-text">{CURRENT_USER.firstName}</span>
+            Welcome back, <span className="brand-text">{firstName}</span>
           </h2>
           <p className="mt-0.5 max-w-md text-xs text-slate-500">
             Track course inquiries and guide students toward their dream programs.

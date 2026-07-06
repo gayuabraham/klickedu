@@ -9,7 +9,7 @@ import { DashboardSkeleton } from '../components/common/Skeleton';
 import ErrorState from '../components/common/ErrorState';
 
 export default function Dashboard() {
-  const { leads, loading, error, reload, lastUpdated, setNavbar } = useLeadsContext();
+  const { leads, loading, error, reload, lastUpdated, setNavbar, currentUser } = useLeadsContext();
 
   useEffect(() => {
     setNavbar({ title: 'Dashboard' });
@@ -24,8 +24,8 @@ export default function Dashboard() {
     .slice(0, 6);
 
   return (
-    <div className="mx-auto max-w-7xl space-y-4 sm:space-y-5">
-      <DashboardHero leadCount={stats.total} lastUpdated={lastUpdated} />
+    <div className="w-full space-y-4 sm:space-y-5">
+      <DashboardHero leadCount={stats.total} lastUpdated={lastUpdated} firstName={currentUser.firstName} />
       <SummaryStatsPanel stats={stats} />
       <DashboardCharts stats={stats} leads={leads} />
       <RecentLeads leads={recentLeads} />

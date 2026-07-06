@@ -26,18 +26,18 @@ export default function LeadPagination({
 
   return (
     <div className="card-elevated flex flex-col gap-3 px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:px-5">
-      <div className="flex flex-wrap items-center gap-4 text-xs text-slate-500">
+      <div className="flex flex-wrap items-center gap-4 text-sm text-slate-500">
         <span>
           Showing <span className="font-semibold text-slate-900">{start}</span>–
           <span className="font-semibold text-slate-900">{end}</span> of{' '}
           <span className="font-semibold text-slate-900">{totalItems}</span> leads
         </span>
         <div className="flex items-center gap-2">
-          <label className="text-[10px] font-medium uppercase tracking-wide text-slate-500">Rows per page</label>
+          <label className="text-xs font-medium uppercase tracking-wide text-slate-500">Rows per page</label>
           <select
             value={pageSize}
             onChange={(e) => onPageSizeChange(Number(e.target.value))}
-            className="rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 text-xs transition-all focus:border-violet-300 focus:outline-none focus:ring-2 focus:ring-violet-500/15"
+            className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm transition-all focus:border-violet-300 focus:outline-none focus:ring-2 focus:ring-violet-500/15"
           >
             {PAGE_SIZES.map((size) => (
               <option key={size} value={size}>{size}</option>
@@ -64,7 +64,7 @@ export default function LeadPagination({
             <button
               key={page}
               onClick={() => onPageChange(page)}
-              className={`min-w-[2rem] rounded-lg px-2 py-1.5 text-xs font-medium transition-all ${
+              className={`min-w-[2.25rem] rounded-lg px-2.5 py-2 text-sm font-medium transition-all ${
                 page === currentPage
                   ? 'bg-violet-600 text-white shadow-sm'
                   : 'text-slate-600 hover:bg-slate-100'

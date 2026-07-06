@@ -1,9 +1,9 @@
 import { getInitials, getAvatarColor } from '../../utils/avatar';
 
 const sizes = {
-  xs: 'h-5 w-5 text-[8px]',
-  sm: 'h-7 w-7 text-[9px]',
-  md: 'h-8 w-8 text-[10px]',
+  xs: 'h-6 w-6 text-[10px]',
+  sm: 'h-8 w-8 text-xs',
+  md: 'h-9 w-9 text-xs',
   lg: 'h-11 w-11 text-sm',
   xl: 'h-14 w-14 text-base',
 };

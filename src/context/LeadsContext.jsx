@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useCallback } from 'react';
 import { useLeads } from '../hooks/useLeads';
+import { loadUserProfile, saveUserProfile } from '../utils/userProfile';
 
 const AUTH_KEY = 'klickedu-auth';
 
@@ -15,6 +16,7 @@ export function LeadsProvider({ children }) {
   const [searchValue, setSearchValue] = useState('');
   const [isSignedIn, setIsSignedIn] = useState(readAuthState);
   const [settingsVersion, setSettingsVersion] = useState(0);
+  const [currentUser, setCurrentUser] = useState(loadUserProfile);
 
   const setNavbar = useCallback(({ title, search }) => {
     setPageTitle(title);
@@ -40,6 +42,10 @@ export function LeadsProvider({ children }) {
     setSettingsVersion((v) => v + 1);
   }, []);
 
+  const updateUserProfile = useCallback((updates) => {
+    setCurrentUser((prev) => saveUserProfile({ ...prev, ...updates }));
+  }, []);
+
   return (
     <LeadsContext.Provider
       value={{
@@ -53,6 +59,8 @@ export function LeadsProvider({ children }) {
         signOut,
         settingsVersion,
         refreshSettings,
+        currentUser,
+        updateUserProfile,
       }}
     >
       {children}

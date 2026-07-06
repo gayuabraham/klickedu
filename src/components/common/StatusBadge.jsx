@@ -2,8 +2,8 @@ import { STATUS_BADGE_CLASS } from '../../constants/leadStatus';
 
 export default function StatusBadge({ status, compact = false }) {
   const sizeClass = compact
-    ? 'px-1.5 py-px text-[9px] font-semibold'
-    : 'px-2.5 py-0.5 text-[11px] font-semibold';
+    ? 'px-2 py-0.5 text-xs font-semibold'
+    : 'px-2.5 py-1 text-xs font-semibold';
 
   return (
     <span
