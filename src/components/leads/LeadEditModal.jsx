@@ -17,7 +17,7 @@ function FormField({ label, required, error, children }) {
 }
 
 function fieldClass(hasError) {
-  return `w-full rounded-xl border px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500/20 ${
+  return `w-full rounded-xl border px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500/20 max-md:min-h-11 ${
     hasError ? 'border-red-300 focus:border-red-400' : 'border-slate-200 focus:border-violet-400'
   }`;
 }
@@ -61,7 +61,7 @@ export default function LeadEditModal({ lead, employees, isOpen, onClose, onSave
           <input type="text" value={form.name} onChange={(e) => handleChange('name', e.target.value)} className={fieldClass(errors.name)} />
         </FormField>
 
-        <div className="grid gap-5 sm:grid-cols-2">
+        <div className="grid gap-5 md:grid-cols-2">
           <FormField label="Mobile" required error={errors.mobile}>
             <input type="text" value={form.mobile} onChange={(e) => handleChange('mobile', e.target.value)} className={fieldClass(errors.mobile)} placeholder="10-digit number" />
           </FormField>
@@ -70,7 +70,7 @@ export default function LeadEditModal({ lead, employees, isOpen, onClose, onSave
           </FormField>
         </div>
 
-        <div className="grid gap-5 sm:grid-cols-2">
+        <div className="grid gap-5 md:grid-cols-2">
           <FormField label="Status">
             <select value={form.status} onChange={(e) => handleChange('status', e.target.value)} className={fieldClass(false)}>
               {LEAD_STATUSES.map((status) => (
@@ -87,9 +87,9 @@ export default function LeadEditModal({ lead, employees, isOpen, onClose, onSave
           </FormField>
         </div>
 
-        <div className="flex justify-end gap-3 border-t border-slate-100 pt-5">
-          <Button type="button" variant="secondary" onClick={onClose}>Cancel</Button>
-          <Button type="submit">Save Changes</Button>
+        <div className="flex justify-end gap-3 border-t border-slate-100 pt-5 max-md:flex-col-reverse">
+          <Button type="button" variant="secondary" onClick={onClose} className="max-md:min-h-11 max-md:w-full">Cancel</Button>
+          <Button type="submit" className="max-md:min-h-11 max-md:w-full">Save Changes</Button>
         </div>
       </form>
     </Modal>

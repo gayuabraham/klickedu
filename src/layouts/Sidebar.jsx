@@ -24,7 +24,7 @@ function NavItem({ item, onClose }) {
       onClick={onClose}
       title={item.label}
       className={({ isActive }) =>
-        `flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors duration-200 lg:px-3.5 ${
+        `flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors duration-200 max-md:min-h-11 lg:px-3.5 ${
           isActive
             ? 'bg-violet-50 text-violet-700 ring-1 ring-violet-100'
             : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
@@ -32,7 +32,7 @@ function NavItem({ item, onClose }) {
       }
     >
       {item.icon}
-      <span className="hidden lg:inline truncate">{item.label}</span>
+      <span className="hidden max-md:inline lg:inline truncate">{item.label}</span>
     </NavLink>
   );
 }
@@ -48,21 +48,31 @@ export default function Sidebar({ isOpen, onClose }) {
       )}
 
       <aside
-        className={`fixed inset-y-0 left-0 z-50 flex w-16 lg:w-56 xl:w-60 flex-col border-r border-slate-200 bg-white transition-transform duration-300 ease-out lg:static lg:translate-x-0 ${
-          isOpen ? 'translate-x-0 shadow-xl' : '-translate-x-full'
-        }`}
+        className={`fixed inset-y-0 left-0 z-50 flex w-16 max-md:w-64 lg:w-56 xl:w-60 flex-col border-r border-slate-200 bg-white transition-transform duration-300 ease-out lg:static lg:translate-x-0 ${
+          isOpen ? 'max-md:translate-x-0 max-md:shadow-xl max-md:animate-slide-in-left' : 'max-md:-translate-x-full'
+        } ${isOpen ? 'translate-x-0 shadow-xl' : '-translate-x-full lg:translate-x-0'}`}
       >
-        <div className="flex h-14 items-center justify-center border-b border-slate-100 px-2 pt-4 pb-3 lg:h-16 lg:justify-start lg:px-5 lg:pt-5">
+        <div className="flex h-14 items-center justify-between border-b border-slate-100 px-2 pt-4 pb-3 max-md:px-4 lg:h-16 lg:justify-start lg:px-5 lg:pt-5">
           <KlickEduLogo variant="sidebar" />
+          <button
+            type="button"
+            onClick={onClose}
+            className="rounded-lg p-2 text-slate-400 transition-colors hover:bg-slate-100 hover:text-slate-600 max-md:min-h-11 max-md:min-w-11 md:hidden"
+            aria-label="Close menu"
+          >
+            <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
         </div>
 
-        <nav className="flex-1 space-y-0.5 overflow-y-auto px-2 py-3 lg:px-3">
+        <nav className="flex-1 space-y-0.5 overflow-y-auto px-2 py-3 max-md:px-3 lg:px-3">
           {mainNav.map((item) => (
             <NavItem key={item.to} item={item} onClose={onClose} />
           ))}
         </nav>
 
-        <div className="space-y-1 border-t border-slate-100 p-2 lg:p-3">
+        <div className="space-y-1 border-t border-slate-100 p-2 max-md:p-3 lg:p-3">
           <NavItem item={bottomNav} onClose={onClose} />
           <div className="hidden lg:block rounded-xl bg-slate-50 p-3.5 ring-1 ring-slate-100">
             <p className="text-xs font-semibold text-slate-700">Need assistance?</p>

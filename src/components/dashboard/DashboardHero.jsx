@@ -2,10 +2,11 @@ import { Link } from 'react-router-dom';
 import EducationIllustration from './EducationIllustration';
 import LastUpdated from './LastUpdated';
 
-export default function DashboardHero({ leadCount, lastUpdated, firstName }) {  return (
+export default function DashboardHero({ leadCount, lastUpdated, firstName }) {
+  return (
     <div className="card-elevated overflow-hidden">
       <div className="flex flex-col sm:flex-row">
-        <div className="flex flex-1 flex-col justify-center px-4 py-2 sm:px-5 sm:py-3">
+        <div className="flex flex-1 flex-col justify-center px-4 py-2 sm:px-5 sm:py-3 max-md:px-3 max-md:py-3">
           <div className="flex items-start justify-between gap-3">
             <p className="text-[10px] font-semibold uppercase tracking-wider text-violet-600">
               KlickEdu CRM
@@ -21,7 +22,7 @@ export default function DashboardHero({ leadCount, lastUpdated, firstName }) {  
           <div className="mt-2.5 flex flex-wrap items-center gap-2">
             <Link
               to="/leads"
-              className="inline-flex items-center gap-1.5 rounded-lg brand-accent px-3.5 py-1.5 text-xs font-semibold text-white shadow-sm transition-shadow hover:shadow-md"
+              className="inline-flex items-center gap-1.5 rounded-lg brand-accent px-3.5 py-1.5 text-xs font-semibold text-white shadow-sm transition-shadow hover:shadow-md max-md:min-h-11 max-md:px-4 max-md:text-sm"
             >
               Manage Leads
               <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -35,8 +36,8 @@ export default function DashboardHero({ leadCount, lastUpdated, firstName }) {  
           </div>
         </div>
 
-        <div className="flex items-center justify-center bg-gradient-to-br from-violet-100 via-purple-50 to-fuchsia-100 px-4 py-3 sm:w-[42%] lg:w-[38%]">
-          <EducationIllustration className="h-32 w-full max-w-[300px] drop-shadow-sm sm:h-36" />
+        <div className="flex items-center justify-center bg-gradient-to-br from-violet-100 via-purple-50 to-fuchsia-100 px-4 py-3 sm:w-[42%] lg:w-[38%] max-md:py-4">
+          <EducationIllustration className="h-32 w-full max-w-[300px] drop-shadow-sm sm:h-36 max-md:h-28" />
         </div>
       </div>
     </div>

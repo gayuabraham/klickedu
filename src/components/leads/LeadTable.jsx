@@ -1,5 +1,6 @@
 import StatusBadge from '../common/StatusBadge';
 import Avatar from '../common/Avatar';
+import LeadCardList from './LeadCardList';
 import { formatDate } from '../../utils/dateUtils';
 
 function ActionButton({ onClick, label, children, variant = 'default' }) {
@@ -26,7 +27,9 @@ const tdClass = 'px-3 py-3 align-middle text-sm';
 
 export default function LeadTable({ leads, onView, onEdit }) {
   return (
-    <div className="card-elevated overflow-hidden">
+    <>
+      <LeadCardList leads={leads} onView={onView} onEdit={onEdit} />
+      <div className="card-elevated hidden overflow-hidden md:block">
       <div className="overflow-x-auto">
         <table className="w-full min-w-[900px] table-fixed text-sm">
           <colgroup>
@@ -110,6 +113,7 @@ export default function LeadTable({ leads, onView, onEdit }) {
           </tbody>
         </table>
       </div>
-    </div>
+      </div>
+    </>
   );
 }

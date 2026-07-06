@@ -64,7 +64,7 @@ export default function Leads() {
   if (error) return <ErrorState message={error} onRetry={reload} />;
 
   return (
-    <div className="mx-auto w-full space-y-4 sm:space-y-5">
+    <div className="mx-auto w-full space-y-4 sm:space-y-5 max-md:space-y-3">
       <LeadsToolbar totalCount={leads.length} filteredCount={filteredLeads.length} />
 
       <LeadFilters

@@ -32,8 +32,8 @@ const axisTick = { fontSize: 11, fill: '#64748b' };
 
 function ChartCard({ title, subtitle, chart, footer }) {
   return (
-    <div className="card-elevated flex flex-col p-4 sm:p-5">
-      <div className="mb-3">
+    <div className="card-elevated flex flex-col p-4 sm:p-5 max-md:p-4">
+      <div className="mb-3 max-md:mb-2">
         <h3 className="text-sm font-semibold text-slate-900">{title}</h3>
         {subtitle && <p className="mt-0.5 text-xs text-slate-500">{subtitle}</p>}
       </div>

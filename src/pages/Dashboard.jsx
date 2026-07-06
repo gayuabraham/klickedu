@@ -24,7 +24,7 @@ export default function Dashboard() {
     .slice(0, 6);
 
   return (
-    <div className="w-full space-y-4 sm:space-y-5">
+    <div className="w-full space-y-4 sm:space-y-5 max-md:space-y-3">
       <DashboardHero leadCount={stats.total} lastUpdated={lastUpdated} firstName={currentUser.firstName} />
       <SummaryStatsPanel stats={stats} />
       <DashboardCharts stats={stats} leads={leads} />

@@ -25,19 +25,19 @@ export default function LeadPagination({
   }
 
   return (
-    <div className="card-elevated flex flex-col gap-3 px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:px-5">
-      <div className="flex flex-wrap items-center gap-4 text-sm text-slate-500">
-        <span>
+    <div className="card-elevated flex flex-col gap-3 px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:px-5 max-md:gap-4 max-md:px-4 max-md:py-4">
+      <div className="flex flex-col gap-3 text-sm text-slate-500 max-md:w-full sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
+        <span className="max-md:text-center">
           Showing <span className="font-semibold text-slate-900">{start}</span>–
           <span className="font-semibold text-slate-900">{end}</span> of{' '}
           <span className="font-semibold text-slate-900">{totalItems}</span> leads
         </span>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 max-md:w-full max-md:justify-between">
           <label className="text-xs font-medium uppercase tracking-wide text-slate-500">Rows per page</label>
           <select
             value={pageSize}
             onChange={(e) => onPageSizeChange(Number(e.target.value))}
-            className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm transition-all focus:border-violet-300 focus:outline-none focus:ring-2 focus:ring-violet-500/15"
+            className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm transition-all focus:border-violet-300 focus:outline-none focus:ring-2 focus:ring-violet-500/15 max-md:min-h-11 max-md:flex-1"
           >
             {PAGE_SIZES.map((size) => (
               <option key={size} value={size}>{size}</option>
@@ -46,14 +46,15 @@ export default function LeadPagination({
         </div>
       </div>
 
-      <div className="flex items-center gap-1">
+      <div className="flex items-center gap-2 max-md:w-full">
         <Button
           variant="secondary"
           size="sm"
           onClick={() => onPageChange(currentPage - 1)}
           disabled={currentPage <= 1}
+          className="max-md:min-h-11 max-md:flex-1"
         >
-          <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
           </svg>
           Prev
@@ -75,7 +76,7 @@ export default function LeadPagination({
           ))}
         </div>
 
-        <span className="min-w-[3.5rem] text-center text-xs font-medium text-slate-600 sm:hidden">
+        <span className="min-w-[3.5rem] flex-1 text-center text-sm font-medium text-slate-600 sm:hidden">
           {currentPage} / {totalPages}
         </span>
 
@@ -84,9 +85,10 @@ export default function LeadPagination({
           size="sm"
           onClick={() => onPageChange(currentPage + 1)}
           disabled={currentPage >= totalPages}
+          className="max-md:min-h-11 max-md:flex-1"
         >
           Next
-          <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
           </svg>
         </Button>

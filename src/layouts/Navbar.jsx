@@ -56,7 +56,7 @@ export default function Navbar({ title, onMenuClick, searchValue, onSearchChange
       <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b border-slate-200 bg-white/95 px-4 shadow-sm backdrop-blur-md lg:px-6">
         <button
           onClick={onMenuClick}
-          className="rounded-lg p-1.5 text-slate-500 transition-colors hover:bg-slate-100 lg:hidden"
+          className="rounded-lg p-1.5 text-slate-500 transition-colors hover:bg-slate-100 max-md:min-h-11 max-md:min-w-11 max-md:p-2.5 lg:hidden"
           aria-label="Open menu"
         >
           <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -84,7 +84,7 @@ export default function Navbar({ title, onMenuClick, searchValue, onSearchChange
         <div className="ml-auto flex items-center gap-1.5">
           <button
             type="button"
-            className="relative rounded-lg p-1.5 text-slate-500 transition-colors hover:bg-slate-100"
+            className="relative rounded-lg p-1.5 text-slate-500 transition-colors hover:bg-slate-100 max-md:min-h-11 max-md:min-w-11 max-md:p-2.5"
             onClick={() => navigate('/leads')}
             title="View leads"
           >
@@ -100,7 +100,7 @@ export default function Navbar({ title, onMenuClick, searchValue, onSearchChange
             <button
               type="button"
               onClick={() => setDropdownOpen((open) => !open)}
-              className="flex items-center gap-2 rounded-lg border border-slate-200 bg-white py-1 pl-1 pr-2 transition-colors hover:border-slate-300"
+              className="flex items-center gap-2 rounded-lg border border-slate-200 bg-white py-1 pl-1 pr-2 transition-colors hover:border-slate-300 max-md:min-h-11 max-md:py-1.5 max-md:pl-1.5 max-md:pr-2.5"
             >
               <Avatar name={currentUser.name} size="sm" />
               <div className="hidden text-left sm:block">
@@ -114,14 +114,14 @@ export default function Navbar({ title, onMenuClick, searchValue, onSearchChange
 
             {dropdownOpen && (
               <div className="absolute right-0 mt-1.5 w-44 rounded-xl border border-slate-200 bg-white py-1 shadow-lg animate-dropdown">
-                <button type="button" onClick={openProfile} className="w-full px-3 py-2 text-left text-xs text-slate-700 hover:bg-slate-50">
+                <button type="button" onClick={openProfile} className="w-full px-3 py-2.5 text-left text-xs text-slate-700 hover:bg-slate-50 max-md:min-h-11 max-md:text-sm">
                   My Profile
                 </button>
-                <button type="button" onClick={openSettings} className="w-full px-3 py-2 text-left text-xs text-slate-700 hover:bg-slate-50">
+                <button type="button" onClick={openSettings} className="w-full px-3 py-2.5 text-left text-xs text-slate-700 hover:bg-slate-50 max-md:min-h-11 max-md:text-sm">
                   Account Settings
                 </button>
                 <hr className="my-1 border-slate-100" />
-                <button type="button" onClick={handleSignOut} className="w-full px-3 py-2 text-left text-xs text-red-600 hover:bg-red-50">
+                <button type="button" onClick={handleSignOut} className="w-full px-3 py-2.5 text-left text-xs text-red-600 hover:bg-red-50 max-md:min-h-11 max-md:text-sm">
                   Sign Out
                 </button>
               </div>

@@ -26,19 +26,19 @@ export default function Modal({ isOpen, onClose, title, subtitle, children, size
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 animate-fade-in">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 animate-fade-in max-md:items-stretch max-md:p-0">
       <div
-        className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm"
+        className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm max-md:bg-slate-900/50"
         onClick={onClose}
         aria-hidden="true"
       />
       <div
-        className={`relative w-full ${sizes[size]} max-h-[90vh] overflow-hidden rounded-2xl bg-white shadow-2xl shadow-slate-200/60 flex flex-col animate-fade-in`}
+        className={`relative flex w-full ${sizes[size]} max-h-[90vh] flex-col overflow-hidden rounded-2xl bg-white shadow-2xl shadow-slate-200/60 animate-fade-in max-md:h-full max-md:max-h-none max-md:max-w-none max-md:rounded-none`}
         role="dialog"
         aria-modal="true"
         aria-labelledby="modal-title"
       >
-        <div className="flex items-start justify-between border-b border-slate-100 px-5 py-4 sm:px-6 sm:py-5">
+        <div className="flex items-start justify-between border-b border-slate-100 px-5 py-4 sm:px-6 sm:py-5 max-md:px-4 max-md:py-4">
           <div>
             <h2 id="modal-title" className="text-base font-semibold text-slate-900 sm:text-lg">
               {title}
@@ -47,7 +47,7 @@ export default function Modal({ isOpen, onClose, title, subtitle, children, size
           </div>
           <button
             onClick={onClose}
-            className="rounded-lg p-2 text-slate-400 transition-colors hover:bg-slate-100 hover:text-slate-600"
+            className="rounded-lg p-2 text-slate-400 transition-colors hover:bg-slate-100 hover:text-slate-600 max-md:min-h-11 max-md:min-w-11"
             aria-label="Close modal"
           >
             <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -55,7 +55,7 @@ export default function Modal({ isOpen, onClose, title, subtitle, children, size
             </svg>
           </button>
         </div>
-        <div className="overflow-y-auto px-5 py-4 sm:px-6 sm:py-5">{children}</div>
+        <div className="overflow-y-auto px-5 py-4 sm:px-6 sm:py-5 max-md:px-4 max-md:py-4">{children}</div>
       </div>
     </div>
   );

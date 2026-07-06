@@ -124,11 +124,11 @@ export default function EditProfileModal({ user, isOpen, onClose, onSave }) {
           </FormField>
         </div>
 
-        <div className="flex justify-end gap-3 border-t border-slate-100 pt-4">
-          <Button type="button" variant="secondary" onClick={onClose}>
+        <div className="flex justify-end gap-3 border-t border-slate-100 pt-4 max-md:flex-col-reverse">
+          <Button type="button" variant="secondary" onClick={onClose} className="max-md:min-h-11 max-md:w-full">
             Cancel
           </Button>
-          <Button type="submit">Save profile</Button>
+          <Button type="submit" className="max-md:min-h-11 max-md:w-full">Save profile</Button>
         </div>
       </form>
     </Modal>

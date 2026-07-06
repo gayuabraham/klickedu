@@ -51,7 +51,7 @@ export default function Employees() {
               <button
                 type="button"
                 onClick={() => setSelectedEmployee(employee)}
-                className="flex min-w-0 flex-1 items-center gap-3 rounded-lg px-3 py-2 text-left transition-colors hover:bg-violet-50/60 sm:px-4 sm:py-2.5"
+                className="flex min-w-0 flex-1 items-center gap-3 rounded-lg px-3 py-2 text-left transition-colors hover:bg-violet-50/60 sm:px-4 sm:py-2.5 max-md:min-h-[52px]"
               >
                 <Avatar name={employee.name} size="md" />
                 <div className="min-w-0 flex-1">
@@ -69,7 +69,7 @@ export default function Employees() {
                 to={`/leads?employee=${encodeURIComponent(employee.name)}`}
                 title={`View ${employee.name}'s leads`}
                 aria-label={`View leads assigned to ${employee.name}`}
-                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-slate-400 transition-colors hover:bg-violet-100 hover:text-violet-600"
+                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-slate-400 transition-colors hover:bg-violet-100 hover:text-violet-600 max-md:h-11 max-md:w-11"
               >
                 <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />

@@ -101,11 +101,11 @@ export default function SummaryStatsPanel({ stats }) {
 
   return (
     <div className="card-elevated overflow-hidden">
-      <div className="grid grid-cols-2 divide-x divide-y divide-slate-100 sm:grid-cols-3 lg:grid-cols-5 lg:divide-y-0">
+      <div className="grid grid-cols-2 divide-x divide-y divide-slate-100 md:grid-cols-3 lg:grid-cols-5 lg:divide-y-0">
         {STAT_ITEMS.map((item, index) => (
           <div
             key={item.key}
-            className={index === STAT_ITEMS.length - 1 && STAT_ITEMS.length % 2 !== 0 ? 'col-span-2 sm:col-span-1' : ''}
+            className={index === STAT_ITEMS.length - 1 && STAT_ITEMS.length % 2 !== 0 ? 'col-span-2 md:col-span-1' : ''}
           >
             <StatItem item={item} value={values[item.key]} />
           </div>
