@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useLeadsContext } from '../context/LeadsContext';
 import { useLeadFilters } from '../hooks/useLeadFilters';
+import { exportLeadsToCsv } from '../utils/exportLeads';
 import LeadsToolbar from '../components/leads/LeadsToolbar';
 import LeadFilters from '../components/leads/LeadFilters';
 import LeadTable from '../components/leads/LeadTable';
@@ -19,6 +20,7 @@ export default function Leads() {
     error,
     reload,
     updateLead,
+    addLead,
     addNote,
     updateNote,
     deleteNote,
@@ -41,7 +43,7 @@ export default function Leads() {
   } = useLeadFilters(leads, searchValue);
 
   const [viewLeadId, setViewLeadId] = useState(null);
-  const [editLeadId, setEditLeadId] = useState(null);
+  const [addOpen, setAddOpen] = useState(false);
 
   useEffect(() => {
     setNavbar({ title: 'Leads', search: filters.search });
@@ -51,7 +53,16 @@ export default function Leads() {
   }, [filters.search, searchValue, setNavbar, onSearchChange]);
 
   const viewLead = leads.find((lead) => lead.id === viewLeadId) || null;
-  const editLead = leads.find((lead) => lead.id === editLeadId) || null;
+
+  function handleExport() {
+    if (filteredLeads.length === 0) return;
+    exportLeadsToCsv(filteredLeads);
+  }
+
+  function handleAddLead(leadData) {
+    addLead(leadData);
+    setAddOpen(false);
+  }
 
   if (loading) {
     return (
@@ -65,7 +76,12 @@ export default function Leads() {
 
   return (
     <div className="mx-auto w-full space-y-4 sm:space-y-5 max-md:space-y-3">
-      <LeadsToolbar totalCount={leads.length} filteredCount={filteredLeads.length} />
+      <LeadsToolbar
+        totalCount={leads.length}
+        filteredCount={filteredLeads.length}
+        onExport={handleExport}
+        onAddLead={() => setAddOpen(true)}
+      />
 
       <LeadFilters
         filters={filters}
@@ -73,6 +89,9 @@ export default function Leads() {
         onFilterChange={updateFilter}
         onReset={resetFilters}
         onSearchChange={onSearchChange}
+        onExport={handleExport}
+        onAddLead={() => setAddOpen(true)}
+        exportDisabled={filteredLeads.length === 0}
       />
 
       {filteredLeads.length === 0 ? (
@@ -85,7 +104,7 @@ export default function Leads() {
           <LeadTable
             leads={paginatedLeads}
             onView={(lead) => setViewLeadId(lead.id)}
-            onEdit={(lead) => setEditLeadId(lead.id)}
+            onEdit={(lead) => setViewLeadId(lead.id)}
           />
           <LeadPagination
             currentPage={currentPage}
@@ -100,19 +119,22 @@ export default function Leads() {
 
       <LeadDetailsModal
         lead={viewLead}
+        employees={employees}
         isOpen={!!viewLeadId}
         onClose={() => setViewLeadId(null)}
+        onSave={updateLead}
         onAddNote={addNote}
         onUpdateNote={updateNote}
         onDeleteNote={deleteNote}
       />
 
       <LeadEditModal
-        lead={editLead}
+        mode="create"
+        lead={null}
         employees={employees}
-        isOpen={!!editLeadId}
-        onClose={() => setEditLeadId(null)}
-        onSave={updateLead}
+        isOpen={addOpen}
+        onClose={() => setAddOpen(false)}
+        onSave={handleAddLead}
       />
     </div>
   );

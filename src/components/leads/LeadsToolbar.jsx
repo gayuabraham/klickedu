@@ -1,6 +1,6 @@
 import Button from '../common/Button';
 
-export default function LeadsToolbar({ totalCount, filteredCount }) {
+export default function LeadsToolbar({ totalCount, filteredCount, onExport, onAddLead }) {
   return (
     <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between max-md:gap-1">
       <div>
@@ -12,13 +12,13 @@ export default function LeadsToolbar({ totalCount, filteredCount }) {
         </p>
       </div>
       <div className="hidden flex-wrap items-center gap-2 md:flex">
-        <Button variant="secondary" size="sm">
+        <Button variant="secondary" size="sm" onClick={onExport} disabled={filteredCount === 0}>
           <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
           </svg>
           Export
         </Button>
-        <Button size="sm">
+        <Button size="sm" onClick={onAddLead}>
           <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
           </svg>

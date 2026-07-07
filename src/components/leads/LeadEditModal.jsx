@@ -22,21 +22,47 @@ function fieldClass(hasError) {
   }`;
 }
 
-export default function LeadEditModal({ lead, employees, isOpen, onClose, onSave }) {
-  const [form, setForm] = useState({ name: '', mobile: '', email: '', status: '', assignedEmployee: '' });
+const EMPTY_FORM = {
+  name: '',
+  mobile: '',
+  email: '',
+  courseInterested: '',
+  status: 'New',
+  assignedEmployee: '',
+};
+
+export default function LeadEditModal({
+  lead,
+  employees,
+  isOpen,
+  onClose,
+  onSave,
+  mode = 'edit',
+}) {
+  const isCreate = mode === 'create';
+  const [form, setForm] = useState(EMPTY_FORM);
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
-    if (!lead) return;
-    setForm({
-      name: lead.name,
-      mobile: lead.mobile,
-      email: lead.email,
-      status: lead.status,
-      assignedEmployee: lead.assignedEmployee,
-    });
+    if (!isOpen) return;
+
+    if (isCreate) {
+      setForm({
+        ...EMPTY_FORM,
+        assignedEmployee: employees[0] || '',
+      });
+    } else if (lead) {
+      setForm({
+        name: lead.name,
+        mobile: lead.mobile,
+        email: lead.email,
+        courseInterested: lead.courseInterested || '',
+        status: lead.status,
+        assignedEmployee: lead.assignedEmployee,
+      });
+    }
     setErrors({});
-  }, [lead]);
+  }, [lead, isOpen, isCreate, employees]);
 
   function handleChange(field, value) {
     setForm((prev) => ({ ...prev, [field]: value }));
@@ -48,14 +74,24 @@ export default function LeadEditModal({ lead, employees, isOpen, onClose, onSave
     setErrors(validationErrors);
     if (Object.keys(validationErrors).length > 0) return;
 
-    onSave({ ...lead, ...form });
+    if (isCreate) {
+      onSave(form);
+    } else {
+      onSave({ ...lead, ...form });
+    }
     onClose();
   }
 
-  if (!lead) return null;
+  if (!isCreate && !lead) return null;
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} title="Edit Lead" subtitle={lead.name} size="lg">
+    <Modal
+      isOpen={isOpen}
+      onClose={onClose}
+      title={isCreate ? 'Add Lead' : 'Edit Lead'}
+      subtitle={isCreate ? 'Create a new lead in the pipeline' : lead.name}
+      size="lg"
+    >
       <form onSubmit={handleSubmit} className="space-y-5">
         <FormField label="Full Name" required error={errors.name}>
           <input type="text" value={form.name} onChange={(e) => handleChange('name', e.target.value)} className={fieldClass(errors.name)} />
@@ -69,6 +105,10 @@ export default function LeadEditModal({ lead, employees, isOpen, onClose, onSave
             <input type="email" value={form.email} onChange={(e) => handleChange('email', e.target.value)} className={fieldClass(errors.email)} />
           </FormField>
         </div>
+
+        <FormField label="Course Interested">
+          <input type="text" value={form.courseInterested} onChange={(e) => handleChange('courseInterested', e.target.value)} className={fieldClass(false)} placeholder="e.g. Full Stack Development" />
+        </FormField>
 
         <div className="grid gap-5 md:grid-cols-2">
           <FormField label="Status">
@@ -89,7 +129,9 @@ export default function LeadEditModal({ lead, employees, isOpen, onClose, onSave
 
         <div className="flex justify-end gap-3 border-t border-slate-100 pt-5 max-md:flex-col-reverse">
           <Button type="button" variant="secondary" onClick={onClose} className="max-md:min-h-11 max-md:w-full">Cancel</Button>
-          <Button type="submit" className="max-md:min-h-11 max-md:w-full">Save Changes</Button>
+          <Button type="submit" className="max-md:min-h-11 max-md:w-full">
+            {isCreate ? 'Add Lead' : 'Save Changes'}
+          </Button>
         </div>
       </form>
     </Modal>

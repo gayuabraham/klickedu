@@ -32,6 +32,27 @@ export function useLeads() {
     setLeads((prev) => prev.map((lead) => (lead.id === updatedLead.id ? updatedLead : lead)));
   }
 
+  function addLead(leadData) {
+    setLeads((prev) => {
+      const maxId = prev.reduce((max, lead) => Math.max(max, Number(lead.id) || 0), 0);
+      const newLead = {
+        id: String(maxId + 1),
+        name: leadData.name,
+        mobile: leadData.mobile,
+        email: leadData.email,
+        courseInterested: leadData.courseInterested || 'General Inquiry',
+        address: leadData.address || '',
+        leadSource: leadData.leadSource || 'Website',
+        assignedEmployee: leadData.assignedEmployee,
+        status: leadData.status || 'New',
+        createdDate: new Date().toISOString().split('T')[0],
+        notes: [],
+      };
+      return [newLead, ...prev];
+    });
+    setLastUpdated(new Date());
+  }
+
   function addNote(leadId, note) {
     setLeads((prev) =>
       prev.map((lead) =>
@@ -73,6 +94,7 @@ export function useLeads() {
     lastUpdated,
     reload: loadLeads,
     updateLead,
+    addLead,
     addNote,
     updateNote,
     deleteNote,
