@@ -2,6 +2,7 @@
 Django settings for crm_backend project.
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -12,13 +13,20 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-ztbwr!@d%=b0hia$gbfrdk@70-=^!txt2b1w6%o^z*i0i6l%)w'
+SECRET_KEY = os.environ.get(
+    'DJANGO_SECRET_KEY',
+    'django-insecure-ztbwr!@d%=b0hia$gbfrdk@70-=^!txt2b1w6%o^z*i0i6l%)w',
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DJANGO_DEBUG', 'True').lower() == 'true'
 
-ALLOWED_HOSTS = []
-
+# Comma-separated hosts, e.g. "api.example.com,localhost"
+ALLOWED_HOSTS = [
+    host.strip()
+    for host in os.environ.get('DJANGO_ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
+    if host.strip()
+]
 
 # Application definition
 
@@ -129,8 +137,15 @@ REST_FRAMEWORK = {
 }
 
 
-# CORS settings - allow the React frontend (Vite default port) to talk to Django
+# CORS — local Vite + optional production frontend URL(s)
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:5173',
     'http://127.0.0.1:5173',
 ]
+
+# Extra origins from env, e.g. "https://leadmanagement-system.netlify.app"
+extra_origins = os.environ.get('CORS_ALLOWED_ORIGINS', '')
+for origin in extra_origins.split(','):
+    origin = origin.strip()
+    if origin and origin not in CORS_ALLOWED_ORIGINS:
+        CORS_ALLOWED_ORIGINS.append(origin)
