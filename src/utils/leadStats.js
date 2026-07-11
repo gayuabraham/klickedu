@@ -1,9 +1,0 @@
-export function calculateLeadStats(leads) {
-  return {
-    total: leads.length,
-    new: leads.filter((l) => l.status === 'New').length,
-    contacted: leads.filter((l) => l.status === 'Contacted').length,
-    qualified: leads.filter((l) => l.status === 'Qualified').length,
-    closed: leads.filter((l) => l.status === 'Closed').length,
-  };
-}

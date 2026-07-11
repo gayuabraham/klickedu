@@ -1,56 +1,138 @@
-# ERP Lead Management Module
+# Study Abroad CRM
 
-A professional React-based ERP Lead Management dashboard built for frontend assessment. Frontend-only with mock JSON data.
+Full-stack CRM for an overseas education consultancy. Manage student enquiries, counselling workflow, follow-ups, and admissions progress.
 
-## Features
+## Stack
 
-- **Dashboard** — Summary cards for Total, New, Contacted, Qualified, and Closed leads
-- **Lead List** — Responsive table with 55 mock leads
-- **Search** — Filter by name, mobile, or email (instant)
-- **Filters** — Status, assigned employee, date range with reset
-- **Pagination** — 10 / 25 / 50 records per page with Previous/Next
-- **Lead Details Modal** — Full lead info with notes CRUD
-- **Edit Lead Modal** — Form validation for name, email, and mobile
-- **Loading, Empty & Error States**
+| Layer | Tech |
+|-------|------|
+| Frontend | React (Vite), Tailwind CSS, React Router, Axios |
+| Backend | Django, Django REST Framework, SQLite |
+| Auth (demo) | Session flag in the browser (no real login API yet) |
 
-## Tech Stack
+## Project layout
 
-- React 19 (Functional Components + Hooks)
-- React Router v7
-- Tailwind CSS v4
-- Vite
+```
+ERP/
+├── frontend/          # React app
+│   └── src/
+│       ├── components/
+│       ├── constants/
+│       ├── context/
+│       ├── hooks/
+│       ├── layouts/
+│       ├── pages/
+│       ├── services/  # Axios API clients
+│       └── utils/
+└── backend/           # Django project
+    ├── crm_backend/   # settings + urls
+    └── leads/         # models, APIs, dashboard, export
+```
 
-## Getting Started
+## Prerequisites
+
+- Node.js 18+ and npm
+- Python 3.11+ (3.12 works)
+- Git (optional)
+
+## Backend setup
 
 ```bash
+cd backend
+
+# Create and activate a virtual environment
+python -m venv venv
+
+# Windows (PowerShell)
+.\venv\Scripts\Activate.ps1
+
+# macOS / Linux
+source venv/bin/activate
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Apply database migrations
+python manage.py migrate
+
+# Start the API server
+python manage.py runserver
+```
+
+API base URL: [http://127.0.0.1:8000/api/](http://127.0.0.1:8000/api/)
+
+Admin (optional): [http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin/)
+
+```bash
+python manage.py createsuperuser
+```
+
+### Main API routes
+
+| Method | Path | Description |
+|--------|------|-------------|
+| GET/POST | `/api/leads/` | List / create students |
+| GET/PATCH/DELETE | `/api/leads/:id/` | Student detail |
+| GET | `/api/leads/export/` | CSV export |
+| GET | `/api/leads/filter-options/` | Filter dropdown values |
+| GET/POST | `/api/employees/` | Counselors |
+| GET/POST | `/api/lead-notes/` | Notes |
+| GET/POST | `/api/followups/` | Follow-ups |
+| GET | `/api/activity-logs/` | Student timeline |
+| GET | `/api/dashboard/summary/` | Dashboard cards |
+
+Query params on `/api/leads/` support search, stage, sub_stage, country, course, intake, employee, priority, lead_source, and date range.
+
+## Frontend setup
+
+```bash
+cd frontend
+
 npm install
 npm run dev
 ```
 
-Open [http://localhost:5173](http://localhost:5173)
+App URL: [http://localhost:5173](http://localhost:5173)
 
-## Build for Production
+### Optional API URL
+
+Create `frontend/.env` if the backend is not on the default host:
+
+```
+VITE_API_URL=http://127.0.0.1:8000/api
+```
+
+Restart `npm run dev` after changing env values.
+
+### Production build
 
 ```bash
+cd frontend
 npm run build
 npm run preview
 ```
 
-Deploy the `dist` folder to Vercel or Netlify.
+## Features
 
-## Project Structure
+- Multi-step **Add Student** form (personal, education, preferences, counselling, documents, follow-up)
+- Study abroad **stage / sub-stage** workflow
+- Advanced filtering and search (server-side)
+- Student details: notes, follow-ups, activity timeline
+- Round Robin counselor assignment on new enquiries
+- Dashboard summary cards and charts
+- CSV export of all student fields
 
-```
-src/
-├── components/
-│   ├── common/       # Reusable UI (Modal, Button, Spinner, etc.)
-│   ├── dashboard/    # Dashboard-specific components
-│   └── leads/        # Lead table, filters, modals, notes
-├── context/          # Global leads state
-├── data/             # Mock JSON data
-├── hooks/            # useLeads, useLeadFilters
-├── layouts/          # Sidebar, Navbar, DashboardLayout
-├── pages/            # Dashboard, Leads
-├── services/         # Mock API service
-└── utils/            # Validation, dates, stats
-```
+## Default login
+
+Open the app and use the Login page. Sign-in is a local demo gate (no password check against Django).
+
+## Development tips
+
+1. Start backend first (`runserver`), then frontend (`npm run dev`).
+2. CORS is enabled for `http://localhost:5173`.
+3. SQLite database file lives at `backend/db.sqlite3`.
+4. New students are assigned to active employees in Round Robin order.
+
+## License
+
+Private / assessment project — use as needed for your team.
