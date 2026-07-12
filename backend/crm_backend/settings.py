@@ -5,6 +5,8 @@ Django settings for crm_backend project.
 import os
 from pathlib import Path
 
+import dj_database_url
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -80,15 +82,28 @@ TEMPLATES = [
 WSGI_APPLICATION = 'crm_backend.wsgi.application'
 
 
-# Database - SQLite (good for development)
+# Database — Postgres when DATABASE_URL is set (production); SQLite for local dev.
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
+# Hosted SQLite is wiped on redeploy; use a managed Postgres (e.g. Render) so leads persist.
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+_database_url = os.environ.get('DATABASE_URL')
+if _database_url:
+    _ssl_require = os.environ.get('DATABASE_SSL_REQUIRE', 'true').lower() == 'true'
+    DATABASES = {
+        'default': dj_database_url.config(
+            default=_database_url,
+            conn_max_age=600,
+            conn_health_checks=True,
+            ssl_require=_ssl_require,
+        )
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 
 # Password validation
